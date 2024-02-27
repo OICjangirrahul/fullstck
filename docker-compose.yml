@@ -11,12 +11,12 @@ services:
       - /app/frontend/node_modules
       - /app/frontend/.next
     command: npm run dev
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./backend:/app/backend
-      - /app/backend/node_modules
+  # backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./backend:/app/backend
+  #     - /app/backend/node_modules
