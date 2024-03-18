@@ -46,20 +46,20 @@ func (c *CustomError) Validate(w http.ResponseWriter, r *http.Request, data inte
 
 	validate := validator.New()
 	if err := validate.Struct(data); err != nil {
-		return c.handleValidationErrors(w, err)
+		return handleValidationErrors(w, err)
 	}
 
 	return false
 }
 
-func (c *CustomError) handleValidationErrors(w http.ResponseWriter, err error) bool {
+func handleValidationErrors(w http.ResponseWriter, err error) bool {
 	switch e := err.(type) {
 	case validator.ValidationErrors:
 		var errorMessages []string
 		for _, err := range e {
 			errorMessages = append(errorMessages, getErrorMessage(err))
 		}
-		respondWithError(w, http.StatusBadRequest, strings.Join(errorMessages, ", "))
+		respondWithError(w, http.StatusBadRequest, errorMessages[0])
 		return true
 	default:
 		http.Error(w, fmt.Sprintf("Unexpected validation error: %v", err), http.StatusInternalServerError)

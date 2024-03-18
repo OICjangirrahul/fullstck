@@ -13,7 +13,7 @@ func main() {
 	fmt.Println("api")
 	mux.HandleFunc("/hello", controller.CreateUser)
 
-	if err := http.ListenAndServe("localhost:8000", mux); err != nil {
+	if err := http.ListenAndServe("localhost:8001", mux); err != nil {
 		fmt.Println(err.Error())
 	}
 }
